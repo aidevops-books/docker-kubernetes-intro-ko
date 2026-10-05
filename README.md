@@ -228,6 +228,16 @@ Cluster를 지우면 실습에서 만든 Kubernetes 자원이 모두 사라집�
 
 Volume 2에서도 이 저장소의 `api/`, `web/`으로 만든 `intro-api:1.0`, `intro-web:1.0` Image를 사용합니다.
 
+## 라이선스
+
+Copyright © 2026 John Bae
+
+- **실습 코드** (매니페스트, Dockerfile, 스크립트, 설정, 예제 애플리케이션 소스): [MIT License](LICENSE). 저작권 표시를 유지하면 자유롭게 쓰고 고칠 수 있습니다.
+- **설명 글** (이 README를 포함한 모든 Markdown 문서): [CC BY-NC-ND 4.0](LICENSE-docs). 출처를 밝히고, 비영리 목적으로, 내용을 바꾸지 않을 때 공유할 수 있습니다. 문서 안에 적힌 명령과 코드 조각은 실습 코드와 같이 MIT로 쓸 수 있습니다.
+- **책 본문과 그림**은 이 저장소에 들어 있지 않으며 모든 권리를 보유합니다.
+
+예제가 사용하는 Container Image, Helm Chart 등 다른 프로젝트의 소프트웨어는 각 프로젝트의 라이선스를 따릅니다.
+
 ---
 
 AIDevOps — <https://www.aidevops.kr>
