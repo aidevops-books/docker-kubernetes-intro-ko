@@ -1,0 +1,13 @@
+{
+  "name": "intro-api",
+  "version": "1.0.0",
+  "description": "Docker & Kubernetes 최신 입문 - 2026 — 실습 프로젝트 API 서버",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "redis": "^4.7.0"
+  }
+}

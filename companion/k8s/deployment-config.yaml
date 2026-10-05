@@ -1,0 +1,26 @@
+# 18장 실습용. 16장의 deployment.yaml에 ConfigMap과 Secret 연결(envFrom)을 더했다.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intro-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: intro-api
+  template:
+    metadata:
+      labels:
+        app: intro-api
+    spec:
+      containers:
+        - name: api
+          image: intro-api:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: intro-config
+            - secretRef:
+                name: intro-secret

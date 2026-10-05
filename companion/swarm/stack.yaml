@@ -1,0 +1,32 @@
+# 13장 실습용 Stack 파일. 9장의 compose.yaml과 같은 서비스를 Swarm 형식으로 옮겼다.
+# Swarm은 build를 하지 않으므로 모든 Node가 받을 수 있는 Registry의 Image를 지정한다.
+services:
+  web:
+    image: registry:5000/intro-web:1.0
+    ports:
+      - "8080:80"
+    environment:
+      API_UPSTREAM: api:3000
+    deploy:
+      replicas: 2
+  api:
+    image: registry:5000/intro-api:1.0
+    environment:
+      REDIS_HOST: redis
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 5s
+        failure_action: rollback
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+volumes:
+  redis-data:

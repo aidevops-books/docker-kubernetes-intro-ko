@@ -1,0 +1,12 @@
+# 21장 실습용: Node에 없는 자원을 요청해 Pending을 만든다.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: too-big
+spec:
+  containers:
+    - name: app
+      image: nginx:alpine
+      resources:
+        requests:
+          cpu: "100"

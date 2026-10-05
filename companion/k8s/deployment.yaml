@@ -1,0 +1,22 @@
+# 16장 실습용. API Pod 3개를 원하는 상태로 선언한다.
+# 이 단계의 API는 Redis 없이 /와 /health만 확인한다(Redis 연결은 20장).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intro-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: intro-api
+  template:
+    metadata:
+      labels:
+        app: intro-api
+    spec:
+      containers:
+        - name: api
+          image: intro-api:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000

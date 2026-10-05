@@ -1,0 +1,17 @@
+# 18장 실습용. 일반 설정은 ConfigMap, 민감한 값은 Secret에 둔다.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: intro-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  REDIS_HOST: "intro-redis"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: intro-secret
+type: Opaque
+stringData:
+  API_TOKEN: "change-me-in-real-life"

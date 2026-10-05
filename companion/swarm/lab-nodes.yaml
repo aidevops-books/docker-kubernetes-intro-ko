@@ -1,0 +1,28 @@
+# 13장 선택 실습: 한 대의 컴퓨터에서 3-Node Swarm을 흉내 낸다.
+# manager1, worker1, worker2는 각각 Docker Engine을 품은 Container(Docker-in-Docker)이고,
+# registry는 세 Node가 함께 Image를 받아 가는 사설 Registry다.
+# 실습용 구성이다. privileged 권한이 필요하므로 운영 환경에서 이 방식을 쓰지 않는다.
+name: swarm-lab
+services:
+  registry:
+    image: registry:3
+  manager1: &node
+    image: docker:29-dind
+    privileged: true
+    hostname: manager1
+    container_name: manager1
+    command: ["--insecure-registry=registry:5000"]
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    ports:
+      - "8090:8080"   # 호스트 8090 → manager1의 Swarm 공개 포트 8080
+  worker1:
+    <<: *node
+    hostname: worker1
+    container_name: worker1
+    ports: []
+  worker2:
+    <<: *node
+    hostname: worker2
+    container_name: worker2
+    ports: []

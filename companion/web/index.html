@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>Docker & Kubernetes 최신 입문 — 실습 프로젝트</title>
+<style>
+  body { font-family: -apple-system, "Malgun Gothic", sans-serif; max-width: 640px; margin: 80px auto; padding: 0 20px; color: #222; }
+  h1 { font-size: 1.5em; }
+  button { padding: 10px 18px; font-size: 1em; cursor: pointer; }
+  #result { margin-top: 20px; padding: 16px; background: #f4f6f8; border-radius: 6px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+  <h1>Web → API → Redis 실습 프로젝트</h1>
+  <p>버튼을 누르면 API Container를 호출하고, API는 Redis Container에서 방문 횟수를 증가시켜 돌려줍니다.</p>
+  <button onclick="callApi()">방문 횟수 증가시키기</button>
+  <div id="result">(아직 호출하지 않음)</div>
+  <script>
+    async function callApi() {
+      const el = document.getElementById('result');
+      el.textContent = '요청 중...';
+      try {
+        const res = await fetch('/api/count');
+        const data = await res.json();
+        el.textContent = JSON.stringify(data, null, 2);
+      } catch (err) {
+        el.textContent = '오류: ' + err;
+      }
+    }
+  </script>
+</body>
+</html>

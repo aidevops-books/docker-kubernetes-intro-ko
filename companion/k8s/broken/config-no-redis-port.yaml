@@ -1,0 +1,9 @@
+# 21장 실습용: Compose에 있던 REDIS_PORT를 빠뜨린 ConfigMap. API가 CrashLoopBackOff에 빠진다.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shop-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  REDIS_HOST: "redis"

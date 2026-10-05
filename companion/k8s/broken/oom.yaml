@@ -1,0 +1,14 @@
+# 21장 실습용: 메모리 제한을 넘겨 OOMKilled를 만든다(12장의 Docker 실험과 같은 프로그램).
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-hog
+spec:
+  containers:
+    - name: app
+      image: intro-api:1.0
+      imagePullPolicy: IfNotPresent
+      command: ["node", "-e", "const a=[];while(true){a.push(Buffer.alloc(8*1024*1024,1))}"]
+      resources:
+        limits:
+          memory: 64Mi

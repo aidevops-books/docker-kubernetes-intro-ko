@@ -1,0 +1,25 @@
+# 19장 실습용. /api와 /health 요청을 intro-api Service로 보내는 규칙.
+# 규칙을 실제로 처리하려면 Ingress Controller(이 책은 Traefik)가 있어야 한다.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: intro-ingress
+spec:
+  ingressClassName: traefik
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: intro-api
+                port:
+                  number: 80
+          - path: /health
+            pathType: Exact
+            backend:
+              service:
+                name: intro-api
+                port:
+                  number: 80

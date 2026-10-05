@@ -1,0 +1,12 @@
+# 17장 실습용. app=intro-api Label을 가진 Pod 앞에 고정된 이름과 주소를 둔다.
+apiVersion: v1
+kind: Service
+metadata:
+  name: intro-api
+spec:
+  type: ClusterIP
+  selector:
+    app: intro-api
+  ports:
+    - port: 80
+      targetPort: 3000

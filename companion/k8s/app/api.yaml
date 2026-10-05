@@ -1,0 +1,37 @@
+# 20장: Compose의 api 서비스. 설정은 ConfigMap과 Secret에서 받는다.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: intro-api:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: shop-config
+            - secretRef:
+                name: shop-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api
+spec:
+  selector:
+    app: api
+  ports:
+    - port: 3000             # Compose처럼 api:3000으로 찾는다
+      targetPort: 3000

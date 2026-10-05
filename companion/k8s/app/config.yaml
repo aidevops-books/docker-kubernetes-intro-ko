@@ -1,0 +1,18 @@
+# 20장: Compose의 environment를 ConfigMap과 Secret으로 옮긴다.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shop-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  REDIS_HOST: "redis"        # Compose와 같은 서비스 이름
+  REDIS_PORT: "6379"         # Compose에도 있던 값. 빠뜨리면 Kubernetes가 넣는 REDIS_PORT=tcp://... 가 쓰인다(부록 E)
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: shop-secret
+type: Opaque
+stringData:
+  API_TOKEN: "change-me-in-real-life"

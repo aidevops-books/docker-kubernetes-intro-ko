@@ -1,0 +1,17 @@
+# 1단계: 의존성만 설치하는 빌드 단계
+FROM node:24-alpine AS deps
+WORKDIR /app
+COPY package.json .
+RUN npm install --omit=dev
+
+# 2단계: 실행에 필요한 파일만 담는 최종 단계
+FROM node:24-alpine
+WORKDIR /app
+ENV NODE_ENV=production PORT=3000
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json server.js ./
+USER node
+EXPOSE 3000
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:3000/health || exit 1
+CMD ["node", "server.js"]

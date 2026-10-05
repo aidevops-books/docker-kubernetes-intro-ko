@@ -1,0 +1,17 @@
+# Chapter 16 실습용 최소 Pod 매니페스트.
+# 이 Pod에는 API Container만 있고 Redis는 없다 -- REDIS_HOST를 지정하지 않으며,
+# /api/count(Redis 연결이 필요한 엔드포인트)는 이 장에서 다루지 않는다.
+# Deployment, Service 등은 2권 《Kubernetes의 이해와 실습》에서 다룬다.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: intro-api-pod
+  labels:
+    app: intro-api
+spec:
+  containers:
+    - name: api
+      image: intro-api:1.0
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 3000

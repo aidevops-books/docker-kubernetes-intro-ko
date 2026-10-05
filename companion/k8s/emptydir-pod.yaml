@@ -1,0 +1,16 @@
+# 18장 실습용. emptyDir은 Pod가 살아 있는 동안만 유지되는 임시 공간이다.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cache-demo
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sh", "-c", "trap 'exit 1' TERM; while true; do sleep 1; done"]
+      volumeMounts:
+        - name: cache
+          mountPath: /cache
+  volumes:
+    - name: cache
+      emptyDir: {}

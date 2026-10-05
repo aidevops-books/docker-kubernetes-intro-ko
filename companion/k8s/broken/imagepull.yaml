@@ -1,0 +1,9 @@
+# 21장 실습용: 존재하지 않는 Tag로 ImagePullBackOff를 만든다.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wrong-tag
+spec:
+  containers:
+    - name: app
+      image: nginx:1.999
